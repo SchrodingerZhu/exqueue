@@ -31,7 +31,7 @@ defmodule Exqueue.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:flist, "~> 0.1.0"}, 
+    [{:flist, "~> 0.1.1"}, 
      {:ex_doc, "~> 0.14", only: :dev, runtime: false}
     ]
   end
