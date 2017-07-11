@@ -42,7 +42,7 @@ defmodule Exqueue.Mixfile do
   end
   defp package() do
     [
-     name: :flist,
+     name: :exqueue,
      licenses: ["MIT"],
      maintainers: ["SchrodingerZhu(朱一帆)"],
      links: %{"SchrodingerZhu's GitHub" => "https://github.com/SchrodingerZhu"},
