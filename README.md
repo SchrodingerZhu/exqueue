@@ -1,7 +1,10 @@
 # Exqueue
 ## Description
 Several simple implements of functional queue data structures in Elixir. 
-**TODO: Add more pratical implements of functional queue.**
+
+## TODO: 
+1. Add more pratical implements of functional queue.
+2. Add mix test.
 
 ## Installation
 
