@@ -215,12 +215,12 @@ defmodule LQueue do
 
   
   defstruct stream: %Stream{Stream.__struct__ | enum: []}, size: 0
-  @type t :: %LQueue{stream: Stream.t}
+  @type t :: %LQueue{stream: Enumerable.t}
 
   @doc """
     Return an empty queue in default.
   """
-  @spec new(Stream.t, non_neg_integer) :: t
+  @spec new(Enumerable.t, non_neg_integer) :: t
   def new(s \\ nil, len \\ 0)  do
     case s do
       nil -> %LQueue{stream: Stream.concat([]), size: len}

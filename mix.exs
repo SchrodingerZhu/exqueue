@@ -3,7 +3,7 @@ defmodule Exqueue.Mixfile do
 
   def project do
     [app: :exqueue,
-     version: "0.1.1",
+     version: "0.1.2",
      elixir: "~> 1.4",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -31,7 +31,7 @@ defmodule Exqueue.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:flist, "~> 0.2.0"}, 
+    [{:flist, "~> 0.2.1"}, 
      {:ex_doc, "~> 0.14", only: :dev, runtime: false}
     ]
   end
