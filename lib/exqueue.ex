@@ -207,3 +207,85 @@ defmodule FQueue do
     end
   end
 end
+
+defmodule LQueue do
+  @moduledoc """
+    An elixir lazy queue implement using Stream.
+  """
+
+  
+  defstruct stream: %Stream{Stream.__struct__ | enum: []}, size: 0
+  @type t :: %LQueue{stream: Stream.t}
+
+  @doc """
+    Return an empty queue in default.
+  """
+  @spec new(Stream.t, non_neg_integer) :: t
+  def new(s \\ nil, len \\ 0)  do
+    case s do
+      nil -> %LQueue{stream: Stream.concat([]), size: len}
+      s -> %LQueue{stream: s, size: len}
+    end
+  end
+
+  @doc """
+    Push an element to the back of a queue.
+  """
+  @spec push(t, any) :: t
+  def push(queue, ele) do
+    Stream.concat(queue.stream, [ele]) |> new(queue.size + 1)
+  end
+  
+  @doc """
+    Get the front element of a queue.
+  """
+  @spec front(t) :: any
+  def front(queue) do
+    cond do
+      queue.size > 0 -> Enum.fetch!(queue.stream, 0)
+      true -> :error
+    end
+  end
+
+  @doc """
+    Pop the front element of a queue.
+  """
+  @spec pop(t) :: t
+  def pop(queue, num \\ 1) do
+    cond do
+      queue.size >= num -> Stream.drop(queue.stream, num) |> new(queue.size - num)
+      true -> :error
+    end
+  end
+
+  @doc """
+    Return true when the queue is empty, false when the queue is not empty.
+  """
+  @spec empty?(t) :: boolean
+  def empty?(queue) do
+    queue.size == 0
+  end
+
+  @doc """
+    Return the size of a queue.
+  """
+  @spec size(t) :: non_neg_integer
+  def size(queue) do
+    queue.size
+  end
+
+  defimpl Inspect do
+    def inspect(queue, _opts \\ []) do
+      case LQueue.empty?(queue) do
+        false -> Inspect.Algebra.concat([
+          "#LQueue<[",
+          "size: " <> to_string(LQueue.size(queue)),
+          ", front: " <> Kernel.inspect(LQueue.front(queue)),
+          "]>"
+          ])
+        true -> "Empty #LQueue"
+      end
+    end
+  end
+
+end
